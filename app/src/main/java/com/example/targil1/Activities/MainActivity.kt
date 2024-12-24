@@ -17,6 +17,7 @@ import com.example.targil1.R
 import com.example.targil1.Signal
 import com.example.targil1.Utilities.Constants
 import com.google.android.material.textview.MaterialTextView
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
 
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity(){
 
     private val handler = Handler(Looper.getMainLooper())
 
+    private var gameJob: Job? = null
 
 
 
@@ -55,6 +57,22 @@ class MainActivity : AppCompatActivity(){
         gameMechanics.setMainObstaclesViews(main_IMG_obstacles)
         initViews()
         startGame() // This starts the game and obstacle generation
+    }
+    override fun onResume() {
+        super.onResume()
+        startGame()
+    }
+    override fun onStop() {
+        super.onStop()
+        stopGame()
+    }
+    override fun onPause() {
+        super.onPause()
+        stopGame()
+    }
+    private fun stopGame() {
+        gameJob?.cancel()
+        gameJob = null
     }
     private fun findViews() {
         main_IMG_mainCharacter = arrayOf(
@@ -159,14 +177,16 @@ private fun refreshUI() { // Checking the status of game .
   }
 }
 */
-    private fun startGame() {
-        lifecycleScope.launch {
-            while (true) {
-                refreshUI()
-                delay(Constants.Timer.DELAY)
-            }
-        }
-    }
+  private fun startGame() {
+      if (gameJob == null) { // Ensure no duplicate game jobs are created
+          gameJob = lifecycleScope.launch {
+              while (true) {
+                  refreshUI()
+                  delay(Constants.Timer.DELAY)
+              }
+          }
+      }
+  }
     private fun refreshUI() { // Checking the status of game .
         gameMechanics.updateObstacles()
         if (gameManager.isGameOver) { // Lost!
