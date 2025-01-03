@@ -1,4 +1,4 @@
-package com.example.targil1
+package com.example.targil1.Utilities
 
 import android.content.Context
 import android.content.Context.VIBRATOR_SERVICE
@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity.VIBRATOR_MANAGER_SERVICE
 import java.lang.ref.WeakReference
 
-class Signal private constructor(context: Context) {
+class SignalManager private constructor(context: Context) {
     private val contextRef = WeakReference(context)
 
     fun vibrate() {
@@ -78,15 +78,15 @@ class Signal private constructor(context: Context) {
 
     companion object {
         @Volatile
-        private var instance: Signal? = null
+        private var instance: SignalManager? = null
 
-        fun init(context: Context): Signal {
+        fun init(context: Context): SignalManager {
             return instance ?: synchronized(this) {
-                instance ?: Signal(context).also { instance = it }
+                instance ?: SignalManager(context).also { instance = it }
             }
         }
 
-        fun getInstance(): Signal{
+        fun getInstance(): SignalManager {
             return instance ?: throw IllegalStateException(
                 "Signal must be initialized by calling init(context) before use."
             )
