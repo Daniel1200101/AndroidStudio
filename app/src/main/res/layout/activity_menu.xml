@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:background="@color/background_color">
+
+    <!-- Image at the top -->
+    <ImageView
+        android:id="@+id/background_image"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:src="@drawable/tom_and_jerry"
+        android:scaleType="centerCrop"
+        android:contentDescription="Background image" />
+
+    <!-- Start button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_start"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="32dp"
+        android:text="Start"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/red"
+        app:cornerRadius="16dp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_below="@id/background_image"
+        android:layout_marginTop="16dp"
+        android:textSize="@dimen/text_size"/>
+
+    <!-- Settings button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_settings"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="32dp"
+        android:text="Settings"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/red"
+        app:cornerRadius="16dp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_below="@id/btn_start"
+        android:layout_marginTop="16dp"
+        android:textSize="@dimen/text_size"/>
+
+    <!-- Records button -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_record"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginHorizontal="32dp"
+        android:text="Records"
+        android:textColor="@color/black"
+        app:backgroundTint="@color/red"
+        app:cornerRadius="16dp"
+        style="@style/Widget.MaterialComponents.Button"
+        android:layout_below="@id/btn_settings"
+        android:layout_marginTop="16dp"
+        android:textSize="@dimen/text_size"/>
+</RelativeLayout>
