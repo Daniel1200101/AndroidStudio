@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.GridView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
@@ -15,6 +16,7 @@ import com.example.targil1.GameManager
 import com.example.targil1.GameMechanics
 import com.example.targil1.Interfaces.TiltCallback
 import com.example.targil1.R
+import com.example.targil1.Utilities.BackgroundMusicPlayer
 import com.example.targil1.Utilities.SignalManager
 import com.example.targil1.Utilities.Constants
 import com.example.targil1.enums.Difficulty
@@ -24,21 +26,32 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
 
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     // Main character
     private lateinit var main_IMG_mainCharacter: Array<AppCompatImageView>
+
     // Buttons
     private lateinit var main_BTN_left: AppCompatImageButton
     private lateinit var main_BTN_right: AppCompatImageButton
+
     // Hearts array
     private lateinit var main_IMG_hearts: Array<AppCompatImageView>
+
     // Score
     private lateinit var main_LBL_score: MaterialTextView
+
     // Obstacles
-    private lateinit var obstaclesGrid: LinearLayout
+    private lateinit var obstacles_grid: LinearLayout
+
+    // Coins
+    private lateinit var coin_grid: LinearLayout
+    // lives
+    private lateinit var lives_grid: LinearLayout
+
     // Game Mechanics for movement
     private lateinit var gameMechanics: GameMechanics
+
     // Game manager for logic
     private lateinit var gameManager: GameManager
 
@@ -59,14 +72,17 @@ class MainActivity : AppCompatActivity(){
         setContentView(R.layout.activity_main)
         sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
         buttonsMovement = sharedPreferences.getBoolean("buttonsMovement", false)
-        gameDifficulty = Difficulty.valueOf(sharedPreferences.getString("selectedDifficulty", "EASY") ?: "EASY")
-        Log.d("GameSettings", "Selected Game Difficulty: ${gameDifficulty.name}")
+        gameDifficulty =
+            Difficulty.valueOf(sharedPreferences.getString("selectedDifficulty", "EASY") ?: "EASY")
+        BackgroundMusicPlayer.init(this)
+        BackgroundMusicPlayer.getInstance().setResourceId(R.raw.tom_and_jerry_chase)
         initTiltDetector()
         findViews() // Connecting the views of the main activity to their images.
         SignalManager.init(this)
         initViews()
         startGame() // This starts the game and obstacle generation
     }
+
     override fun onResume() {
         super.onResume()
         if (!buttonsMovement) {
@@ -74,21 +90,27 @@ class MainActivity : AppCompatActivity(){
         } else {
             tiltDetector.stop() // Optionally stop the tilt detector if buttonsMovement is false
         }
+        BackgroundMusicPlayer.getInstance().playMusic()
         startGame()
     }
+
     override fun onStop() {
         super.onStop()
         tiltDetector.stop()
         stopGame()
     }
+
     override fun onPause() {
         super.onPause()
+        BackgroundMusicPlayer.getInstance().stopMusic()
         stopGame()
     }
+
     private fun stopGame() {
         gameJob?.cancel()
         gameJob = null
     }
+
     private fun findViews() {
         main_IMG_mainCharacter = arrayOf(
             findViewById(R.id.main_IMG_jerry1),
@@ -107,36 +129,50 @@ class MainActivity : AppCompatActivity(){
             findViewById(R.id.main_IMG_heart2),
             findViewById(R.id.main_IMG_heart3)
         )
-        obstaclesGrid = findViewById(R.id.obstcaleGrid_layout)
-
+        obstacles_grid = findViewById(R.id.obstcale_grid_layout)
+        coin_grid = findViewById(R.id.coin_grid_layout)
+        lives_grid = findViewById(R.id.lives_grid_layout)
     }
 
     private fun initViews() {
         gameManager = GameManager(this)
         gameMechanics = GameMechanics()
-        gameMechanics.setGameManagerListener(gameManager)
-        gameMechanics.setMainCharacterViews(main_IMG_mainCharacter)
-        gameMechanics.setMainObstaclesViews(obstaclesGrid)
-        initializeObstacles();
+        initGameMechanics()
+        initializeGrid(obstacles_grid)
+        initializeGrid(coin_grid)
+        initializeGrid(lives_grid)
         calculateDelay(gameDifficulty)
+        initButtons()
         main_LBL_score.text = gameManager.score.toString()
-        if(buttonsMovement) {
-            main_BTN_left.setOnClickListener { view: View ->  gameMechanics.moveCharacter(Directions.LEFT) }
-            main_BTN_right.setOnClickListener { view: View -> gameMechanics.moveCharacter(Directions.RIGHT) }
-        }else
-        {
-            main_BTN_left.visibility= View.INVISIBLE
-            main_BTN_right.visibility= View.INVISIBLE
-        }
         refreshUI()
     }
-    private fun initializeObstacles() {
+
+    private fun initButtons() {
+        if (buttonsMovement) {
+            main_BTN_left.setOnClickListener { view: View -> gameMechanics.moveCharacter(Directions.LEFT) }
+            main_BTN_right.setOnClickListener { view: View -> gameMechanics.moveCharacter(Directions.RIGHT) }
+        } else {
+            main_BTN_left.visibility = View.INVISIBLE
+            main_BTN_right.visibility = View.INVISIBLE
+        }
+
+    }
+    private fun initGameMechanics() {
+        gameMechanics.setGameManagerListener(gameManager)
+        gameMechanics.setMainCharacterViews(main_IMG_mainCharacter)
+        gameMechanics.setMainObstaclesViews(obstacles_grid)
+        gameMechanics.setMainCoinsViews(coin_grid)
+        gameMechanics.setMainLivesViews(lives_grid)
+    }
+
+    private fun initializeGrid(grid: LinearLayout) {
         for (i in 0 until totalRows) {
             for (j in 0 until totalColumns) {
-                gameMechanics.hideImage(i, j,obstaclesGrid)
+                gameMechanics.hideImage(i, j, grid)
             }
         }
     }
+
     private fun initTiltDetector() {
         tiltDetector = TiltDetector(
             context = this,
@@ -158,82 +194,100 @@ class MainActivity : AppCompatActivity(){
         }
     }
     */
-  /*
-private fun refreshUI() { // Checking the status of game .
- gameMechanics.updateObstacles()
-  if (gameManager.isGameOver) { // Lost!
-      Log.d("Game Status", "Game Over! " + gameManager.score)
-      changeActivity("Game Over!", gameManager.score)
-  } else { // Ongoing game:
-      if (gameManager.obstacleFrequencies()) {
-          gameMechanics.createObstacle()
-      }
-      gameManager.tick()
-      main_LBL_score.text = gameManager.score.toString()
-      if (gameManager.hits != 0 ) {
-          main_IMG_hearts[main_IMG_hearts.size - gameManager.hits].visibility =
-              View.INVISIBLE
+    /*
+  private fun refreshUI() { // Checking the status of game .
+   gameMechanics.updateObstacles()
+    if (gameManager.isGameOver) { // Lost!
+        Log.d("Game Status", "Game Over! " + gameManager.score)
+        changeActivity("Game Over!", gameManager.score)
+    } else { // Ongoing game:
+        if (gameManager.obstacleFrequencies()) {
+            gameMechanics.createObstacle()
+        }
+        gameManager.tick()
+        main_LBL_score.text = gameManager.score.toString()
+        if (gameManager.hits != 0 ) {
+            main_IMG_hearts[main_IMG_hearts.size - gameManager.hits].visibility =
+                View.INVISIBLE
 
-      }
+        }
 
+    }
   }
-}
-   */
-
+     */
     private fun calculateDelay(gameDifficulty: Difficulty) {
         when (gameDifficulty) {
             Difficulty.EASY -> {
-                choosenGameDelay=Constants.Timer.SLOW_DELAY
+                choosenGameDelay = Constants.Timer.SLOW_DELAY
             }
+
             Difficulty.MEDIUM -> {
-                choosenGameDelay=Constants.Timer.MEDIUM_DELAY
+                choosenGameDelay = Constants.Timer.MEDIUM_DELAY
             }
+
             Difficulty.HARD -> {
-                choosenGameDelay=Constants.Timer.FAST_DELAY
+                choosenGameDelay = Constants.Timer.FAST_DELAY
             }
         }
 
     }
 
-  private fun startGame() {
+    private fun startGame() {
         if (gameJob == null) { // Ensure no duplicate game jobs are created
-          gameJob = lifecycleScope.launch {
-              while (true) {
-                  refreshUI()
-                  delay((choosenGameDelay))
-              }
-          }
-      }
-  }
+            gameJob = lifecycleScope.launch {
+                while (true) {
+                    refreshUI()
+                    delay((choosenGameDelay))
+                }
+            }
+        }
+    }
     private fun refreshUI() { // Checking the status of game .
         gameMechanics.updateObstacles()
+        gameMechanics.updateCoins()
+        gameMechanics.updateLives()
+        var heartPositionRemoved:Int = 0
         if (gameManager.isGameOver) { // Lost!
             Log.d("Game Status", "Game Over! " + gameManager.score)
             SignalManager.getInstance().toast("New game!")
             for (view in main_IMG_hearts) {
-                    view.visibility = View.VISIBLE
+                view.visibility = View.VISIBLE
             }
             gameManager.setHits(0)
         }
-            if (gameManager.shouldCreateObstacle()) {
-                gameMechanics.createObstacle()
-            }
-            gameManager.tick()
-            main_LBL_score.text = gameManager.score.toString()
-            if (gameManager.hits != 0 ) {
-                main_IMG_hearts[main_IMG_hearts.size - gameManager.hits].visibility =
-                    View.INVISIBLE
-
-            }
+        if (gameManager.shouldCreateObstacle()) {
+            gameMechanics.createObstacle()
         }
-     private fun changeActivity(message: String, score: Int) {
-         val intent = Intent(this, ScoreActivity::class.java)
-         var bundle = Bundle()
-         bundle.putInt(Constants.BundleKeys.SCORE_KEY, score)
-         bundle.putString(Constants.BundleKeys.STATUS_KEY, message)
-         intent.putExtras(bundle)
-         startActivity(intent)
-         finish()
-     }
+        if (gameManager.shouldCreateCoin()) {
+            gameMechanics.createCoin()
+        }
+        if (gameManager.shouldCreateLife()) {
+            gameMechanics.createLife()
+        }
+        gameManager.tick()
+        main_LBL_score.text = gameManager.score.toString()
+        if (gameManager.hits != 0) {
+            heartPositionRemoved = main_IMG_hearts.size - gameManager.hits
+            main_IMG_hearts[heartPositionRemoved].visibility =
+                View.INVISIBLE
+        }
+        if (gameManager.lifeBonus != 0) {
+            main_IMG_hearts[heartPositionRemoved].visibility =
+                View.VISIBLE
+            gameManager.setLifeBonus(0)
+            gameManager.setHits(gameManager.hits-1)
+
+        }
+    }
+
+    private fun changeActivity(message: String, score: Int) {
+        val intent = Intent(this, ScoreActivity::class.java)
+        var bundle = Bundle()
+        bundle.putInt(Constants.BundleKeys.SCORE_KEY, score)
+        bundle.putString(Constants.BundleKeys.STATUS_KEY, message)
+        intent.putExtras(bundle)
+        startActivity(intent)
+        finish()
+    }
 }
 

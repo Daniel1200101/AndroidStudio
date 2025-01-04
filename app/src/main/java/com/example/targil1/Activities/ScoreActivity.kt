@@ -24,7 +24,7 @@ class ScoreActivity : AppCompatActivity() {
     private fun initViews() {
         val bundle: Bundle? = intent.extras
         val score = bundle?.getInt(Constants.BundleKeys.SCORE_KEY, 0) ?: 0
-        val message = bundle?.getString(Constants.BundleKeys.STATUS_KEY,"🤷🏻‍♂️Unknown")
+        val message = bundle?.getString(Constants.BundleKeys.STATUS_KEY, "🤷🏻‍♂️Unknown")
 
         score_LBL_score.text = buildString {
             append(message)

@@ -92,10 +92,12 @@ class SettingsActivity : AppCompatActivity() {
                 btnEasy.backgroundTintList = ColorStateList.valueOf(getColor(R.color.red))
                 selectedDifficultyButton = btnEasy
             }
+
             Difficulty.MEDIUM -> {
                 btnMedium.backgroundTintList = ColorStateList.valueOf(getColor(R.color.red))
                 selectedDifficultyButton = btnMedium
             }
+
             Difficulty.HARD -> {
                 btnHard.backgroundTintList = ColorStateList.valueOf(getColor(R.color.red))
                 selectedDifficultyButton = btnHard
@@ -106,7 +108,8 @@ class SettingsActivity : AppCompatActivity() {
 
     private fun onDifficultySelected(button: MaterialButton, difficulty: Difficulty) {
         // Update UI for selected difficulty
-        selectedDifficultyButton?.backgroundTintList = ColorStateList.valueOf(getColor(R.color.light_gray))
+        selectedDifficultyButton?.backgroundTintList =
+            ColorStateList.valueOf(getColor(R.color.light_gray))
         button.backgroundTintList = ColorStateList.valueOf(getColor(R.color.red))
         selectedDifficultyButton = button
 

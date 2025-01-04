@@ -14,7 +14,11 @@ class GameMechanics() {
     // Variable for the view references
     lateinit var mainCharacterImages: Array<AppCompatImageView>
         private set
-    lateinit var obstaclesImages: LinearLayout
+    lateinit var obstacles_matrix: LinearLayout
+        private set
+    lateinit var coins_matrix: LinearLayout
+        private set
+    lateinit var lives_matrix: LinearLayout
         private set
     private var gameManagerListener: GameManagerListener? = null
 
@@ -24,26 +28,39 @@ class GameMechanics() {
     var characterCol: Int = 2
         private set
     var characterRow: Int = totalRows - 1
-    var obstaclesCol: Int = 0
         private set
-    private var obstaclesRow: Int = 0
+    var obstacleCol: Int = 0
         private set
-
+    var obstacleRow: Int = 0
+        private set
+    var coinCol: Int = 0
+        private set
+    var coinRow: Int = 0
+        private set
+    var lifeCol: Int = 0
+        private set
+    var lifeRow: Int = 0
+        private set
 
     // Function to set the views in the GameMechanics class
     fun setMainCharacterViews(mainCharacterImages: Array<AppCompatImageView>) {
         this.mainCharacterImages = mainCharacterImages
     }
 
-    fun setMainObstaclesViews(obstaclesImages: LinearLayout) {
-        this.obstaclesImages = obstaclesImages
+    fun setMainObstaclesViews(obstaclesGrid: LinearLayout) {
+        this.obstacles_matrix = obstaclesGrid
+    }
+
+    fun setMainCoinsViews(coinsGrid: LinearLayout) {
+        this.coins_matrix = coinsGrid
+    }
+    fun setMainLivesViews(livesGrid: LinearLayout) {
+        this.lives_matrix = livesGrid
     }
 
     fun setGameManagerListener(listener: GameManagerListener) {
         gameManagerListener = listener
     }
-
-
     // Function to move character
     fun moveCharacter(direction: Directions) {
         when (direction) {
@@ -79,44 +96,91 @@ class GameMechanics() {
         }
     }
 
-    // Obstacles
+    // grids functions
     fun createObstacle() {
         val column = Random.nextInt(totalColumns)
-        obstaclesCol = column
-        showImage(0, column, obstaclesImages)
-        Log.d("updateObstacles", "Obstacle created")
+        obstacleCol = column
+        showImage(0, column, obstacles_matrix)
+    }
+
+    fun createCoin() {
+        val column = Random.nextInt(totalColumns)
+        coinCol = column
+        if (obstacleCol != coinCol)
+            showImage(0, column, coins_matrix)
+    }
+    fun createLife() {
+        val column = Random.nextInt(totalColumns)
+        lifeCol = column
+        if (lifeCol != coinCol && lifeCol!=obstacleCol)
+            showImage(0, column, lives_matrix)
     }
 
     fun updateObstacles() {
         for (i in totalRows - 2 downTo 0) {
             for (j in 0 until totalColumns) {
-                val cell = getCellImage(i, j, obstaclesImages)
+                val cell = getCellImage(i, j, obstacles_matrix)
                 if (cell.visibility == View.VISIBLE) {
-                    obstaclesCol = j
-                    obstaclesRow = i
-                    if (checkCollision()) {
-                        gameManagerListener?.collisionDetected()
+                    obstacleRow = i
+                    obstacleCol = j
+                    if (checkCollision(obstacleRow, obstacleCol)) {
+                        gameManagerListener?.obstacleCollisionDetected()
                     } else {
                         if (i != totalRows - 2) {
                             // not last obstacle's row
-                            showImage(i + 1, j, obstaclesImages)
+                            showImage(i + 1, j, obstacles_matrix)
                         } else {
                             gameManagerListener?.increaseScore()
                         }
                     }
-                    hideImage(i, j, obstaclesImages)
+                    hideImage(i, j, obstacles_matrix)
                 }
             }
         }
     }
-    fun checkCollision(): Boolean {
-        // Check if the obstacle is directly above the character (one row before the character's row)
-        if (obstaclesRow == characterRow - 1 && obstaclesCol == characterCol) {
-            // Collision detected, return true
-            return true
+    fun updateCoins() {
+        for (i in totalRows - 2 downTo 0) {
+            for (j in 0 until totalColumns) {
+                val cell = getCellImage(i, j, coins_matrix)
+                if (cell.visibility == View.VISIBLE) {
+                    coinRow = i
+                    coinCol = j
+                    if (checkCollision(coinRow, coinCol)) {
+                        gameManagerListener?.coinCollisionDetected()
+                    } else {
+                        if (i != totalRows - 2) {
+                            // not last obstacle's row
+                            showImage(i + 1, j, coins_matrix)
+                        }
+                    }
+                    hideImage(i, j,coins_matrix)
+                }
+            }
         }
-        // No collision, return false
-        return false
+    }
+    fun updateLives() {
+        for (i in totalRows - 2 downTo 0) {
+            for (j in 0 until totalColumns) {
+                val cell = getCellImage(i, j, lives_matrix)
+                if (cell.visibility == View.VISIBLE) {
+                    lifeRow = i
+                    lifeCol = j
+                    if (checkCollision(lifeRow, lifeCol)) {
+                        gameManagerListener?.lifeCollisionDetected()
+                    } else {
+                        if (i != totalRows - 2) {
+                            // not last obstacle's row
+                            showImage(i + 1, j, lives_matrix)
+                        }
+                    }
+                    hideImage(i, j,lives_matrix)
+                }
+            }
+        }
+    }
+    fun checkCollision(row: Int, col: Int): Boolean {
+        // Check if the given cell is directly above the character (one row before the character's row)
+        return row == characterRow - 1 && col == characterCol
     }
 
     fun getCellImage(row: Int, column: Int, grid: LinearLayout): AppCompatImageView {

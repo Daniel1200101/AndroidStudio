@@ -25,11 +25,15 @@ class MenuActivity: AppCompatActivity() {
         findViews()
         initViews()
     }
+    override fun onResume() {
+        super.onResume()
+        BackgroundMusicPlayer.getInstance().playMusic()
+    }
     override fun onPause() {
         super.onPause()
-        // Stop music when the activity is paused
-        BackgroundMusicPlayer.getInstance().stopMusic()
+        BackgroundMusicPlayer.getInstance().pauseMusic()
     }
+
     private fun findViews() {
         // Initially set the buttons.
         MENU_BTN_START = findViewById(R.id.btn_start)

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".Activities.MainActivity"
     android:background="@color/background_color"
     android:layoutDirection="ltr"
+    android:orientation="vertical"
+    tools:context=".Activities.MainActivity"
 
     >
 
@@ -18,8 +17,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="right"
-        android:padding="10dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="10dp">
 
         <!-- Hearts Layout -->
         <LinearLayout
@@ -32,28 +31,25 @@
                 android:id="@+id/main_IMG_heart1"
                 android:layout_width="@dimen/heart_dimens"
                 android:layout_height="@dimen/heart_dimens"
-                android:padding="@dimen/default_padding"
-                android:src="@drawable/heart"
                 android:layout_weight="1"
-                />
+                android:padding="@dimen/default_padding"
+                android:src="@drawable/heart" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_heart2"
                 android:layout_width="@dimen/heart_dimens"
                 android:layout_height="@dimen/heart_dimens"
-                android:src="@drawable/heart"
-                android:padding="@dimen/default_padding"
                 android:layout_weight="1"
-                />
+                android:padding="@dimen/default_padding"
+                android:src="@drawable/heart" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_heart3"
                 android:layout_width="@dimen/heart_dimens"
                 android:layout_height="@dimen/heart_dimens"
-                android:src="@drawable/heart"
-                android:padding="@dimen/default_padding"
                 android:layout_weight="1"
-                />
+                android:padding="@dimen/default_padding"
+                android:src="@drawable/heart" />
         </LinearLayout>
 
         <!-- Space between hearts and score -->
@@ -67,473 +63,1232 @@
             android:id="@+id/main_LBL_score"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="000"
+            android:layout_marginRight="15dp"
             android:textSize="@dimen/default_text_size"
             android:textStyle="bold"
-            android:layout_marginRight="15dp" />
+            tools:text="000" />
     </LinearLayout>
     <!-- Obstacle grid -->
     <LinearLayout
-        android:id="@+id/obstcaleGrid_layout"
-        android:layout_below ="@+id/topLayout"
-        android:layout_above ="@+id/buttons"
+        android:id="@+id/obstcale_grid_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_above="@+id/buttons"
+        android:layout_below="@+id/topLayout"
         android:orientation="vertical">
         <!-- first row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom1"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
+                android:layout_weight="1"
                 android:src="@drawable/tom"
 
                 />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom2"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom3"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom4"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom5"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
         </LinearLayout>
         <!-- second row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom6"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom7"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom8"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom9"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom10"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
         </LinearLayout>
         <!-- third row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom11"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom12"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom13"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom14"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom15"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
 
         </LinearLayout>
         <!-- fourth row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom16"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom17"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom18"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom19"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom20"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
         </LinearLayout>
 
         <!-- fifth row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom21"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom22"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom23"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom24"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom25"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
 
         </LinearLayout>
         <!-- sixth row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom26"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom27"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom28"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom29"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom30"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
         </LinearLayout>
         <!-- seventh row -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            >
+            android:layout_weight="1">
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom31"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom32"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom33"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom34"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_IMG_tom35"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/obstacle_height"
-                android:layout_weight="1"
                 android:layout_gravity="center"
-                android:src="@drawable/tom"
-                />
-        </LinearLayout>
-            <!-- eight row -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
                 android:layout_weight="1"
-                >
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/main_IMG_tom36"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/obstacle_height"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/tom"
-                    />
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/main_IMG_tom37"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/obstacle_height"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/tom"
-                    />
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/main_IMG_tom38"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/obstacle_height"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/tom"
-                    />
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/main_IMG_tom39"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/obstacle_height"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/tom"
-                    />
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/main_IMG_tom40"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/obstacle_height"
-                    android:layout_weight="1"
-                    android:layout_gravity="center"
-                    android:src="@drawable/tom"
-                    />
+                android:src="@drawable/tom" />
+        </LinearLayout>
+        <!-- Eighth row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
 
-            </LinearLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_tom36"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/obstacle_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_tom37"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/obstacle_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_tom38"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/obstacle_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_tom39"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/obstacle_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_tom40"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/obstacle_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/tom" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/coin_grid_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttons"
+        android:layout_below="@+id/topLayout"
+        android:orientation="vertical">
+        <!-- First row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin5"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+        </LinearLayout>
+
+        <!-- Second row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin6"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin7"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin8"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin9"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin10"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+        </LinearLayout>
+
+        <!-- Third row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin11"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin12"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin13"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin14"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin15"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+        </LinearLayout>
+
+        <!-- Fourth row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin16"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin17"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin18"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin19"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin20"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+        </LinearLayout>
+        <!-- fifth row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin21"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin22"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin23"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin24"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin25"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+        </LinearLayout>
+        <!-- Sixth row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin26"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin27"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin28"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin29"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin30"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+        </LinearLayout>
+
+        <!-- Seventh row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin31"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin32"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin33"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin34"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin35"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+        </LinearLayout>
+
+        <!-- Eighth row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin36"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin37"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin38"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin39"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_coin40"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/coin_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/carton_cheese" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <!-- lives grid -->
+    <LinearLayout
+        android:id="@+id/lives_grid_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/buttons"
+        android:layout_below="@+id/topLayout"
+        android:orientation="vertical">
+
+
+        <!-- First row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life1"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese"
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life2"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese"
+
+                />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life3"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life4"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life5"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+        </LinearLayout>
+
+        <!-- Second row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life6"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life7"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life8"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life9"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life10"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+        </LinearLayout>
+
+        <!-- Third row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life11"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life12"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life13"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life14"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life15"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+        </LinearLayout>
+
+        <!-- Fourth row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life16"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life17"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life18"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life19"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life20"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+        </LinearLayout>
+
+        <!-- Fifth row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life21"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life22"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life23"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life24"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life25"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+        </LinearLayout>
+
+        <!-- Sixth row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life26"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life27"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life28"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life29"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life30"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+        </LinearLayout>
+
+        <!-- Seventh row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life31"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life32"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life33"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life34"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life35"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+        </LinearLayout>
+
+        <!-- Eighth row -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life36"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life37"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life38"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life39"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/main_IMG_life40"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/live_height"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:src="@drawable/red_cartoon_cheese" />
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/character_height"
-        android:layout_weight="1"
         android:layout_above="@id/buttons"
-        >
+        android:layout_weight="1">
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_jerry1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:layout_weight="1"
             android:src="@drawable/jerry"
-            />
+            android:visibility="invisible" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_jerry2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:layout_weight="1"
             android:src="@drawable/jerry"
-            />
+            android:visibility="invisible" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_jerry3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            android:src="@drawable/jerry"
-            />
+            android:layout_weight="1"
+            android:src="@drawable/jerry" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_jerry4"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:layout_weight="1"
             android:src="@drawable/jerry"
-            />
+            android:visibility="invisible" />
+
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/main_IMG_jerry5"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:layout_gravity="center"
-            android:visibility="invisible"
+            android:layout_weight="1"
             android:src="@drawable/jerry"
-            />
+            android:visibility="invisible" />
     </LinearLayout>
 
     <LinearLayout
         android:id="@+id/buttons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:layout_alignParentBottom="true"
-        >
+        android:orientation="horizontal">
 
         <!-- Left Button -->
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/main_BTN_left"
-            android:layout_alignParentRight="true"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/arrow_left"
-            android:background="@android:color/transparent"
             android:layout_margin="@dimen/button_margin"
-             /> <!-- Ensure it stays on the left -->
+            android:background="@android:color/transparent"
+            android:src="@drawable/arrow_left" /> <!-- Ensure it stays on the left -->
 
         <!-- Space between buttons -->
         <View
@@ -544,15 +1299,12 @@
         <!-- Right Button -->
         <androidx.appcompat.widget.AppCompatImageButton
             android:id="@+id/main_BTN_right"
-            android:layout_alignParentRight="true"
             android:layout_width="60dp"
             android:layout_height="60dp"
-            android:src="@drawable/arrow_right"
-            android:background="@android:color/transparent"
             android:layout_margin="@dimen/button_margin"
-            /> <!-- Ensure it stays on the right -->
+            android:background="@android:color/transparent"
+            android:src="@drawable/arrow_right" /> <!-- Ensure it stays on the right -->
 
     </LinearLayout>
-
 
 </RelativeLayout>
