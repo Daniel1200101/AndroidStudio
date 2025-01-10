@@ -1,21 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Activities.ScoreActivity"
-    android:background="@color/background_color"
-    >
+    android:background="@color/background_color">
 
+    <!-- Score TextView -->
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/score_LBL_score"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
         android:textSize="48dp"
         android:textStyle="bold"
         android:gravity="center"
-        tools:text="Status\n000" />
+        tools:text="Status\n000"
+        android:layout_marginTop="50dp"/>
+
+    <!-- Message TextView to show when reaching high scores -->
+
+
+    <!-- EditText to enter name (initially hidden) -->
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter your name"
+        android:layout_below="@+id/score_LBL_score"
+        android:layout_marginTop="20dp"
+        android:padding="10dp"/>
+
+    <!-- Submit Button to save name (initially hidden) -->
+    <Button
+        android:id="@+id/submitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:layout_below="@id/nameEditText"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"/>
+
 </RelativeLayout>

@@ -12,6 +12,7 @@ import java.lang.ref.WeakReference
 
 class SignalManager private constructor(context: Context) {
     private val contextRef = WeakReference(context)
+    private var currentToast: Toast? = null
 
     fun vibrate() {
         contextRef.get()?.let { context ->
@@ -50,12 +51,10 @@ class SignalManager private constructor(context: Context) {
                     SOSPattern,
                     -1
                 )
-
                 val oneShotVibrationEffect = VibrationEffect.createOneShot(
                     500,
                     VibrationEffect.DEFAULT_AMPLITUDE
                 )
-
                 vibrator.vibrate(oneShotVibrationEffect)
 //                vibrator.vibrate(waveFormVibrationEffect)
             } else {
@@ -70,10 +69,16 @@ class SignalManager private constructor(context: Context) {
                 .makeText(
                     context,
                     text,
-                    Toast.LENGTH_LONG
+                    Toast.LENGTH_SHORT
                 )
                 .show()
         }
+    }
+
+    fun cancelToast() {
+        // Cancel the active toast if it exists
+        currentToast?.cancel()
+        currentToast = null
     }
 
     companion object {

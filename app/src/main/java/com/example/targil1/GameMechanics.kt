@@ -41,6 +41,13 @@ class GameMechanics() {
         private set
     var lifeRow: Int = 0
         private set
+    var coinRandomCol: Int = 0
+        private set
+    var lifeRandomCol: Int = 0
+        private set
+    var obstacleRandomCol: Int = 0
+        private set
+
 
     // Function to set the views in the GameMechanics class
     fun setMainCharacterViews(mainCharacterImages: Array<AppCompatImageView>) {
@@ -73,6 +80,7 @@ class GameMechanics() {
     private fun moveLeft() {
         if (characterCol > 0) {
             updateCharacterPosition(characterCol, characterCol - 1)
+            mainCharacterImages[characterCol-1].scaleX = -1f
             characterCol--
         }
     }
@@ -80,6 +88,7 @@ class GameMechanics() {
     private fun moveRight() {
         if (characterCol < mainCharacterImages.size - 1) {
             updateCharacterPosition(characterCol, characterCol + 1)
+            mainCharacterImages[characterCol+1].scaleX = 1f
             characterCol++
         }
     }
@@ -102,11 +111,10 @@ class GameMechanics() {
         obstacleCol = column
         showImage(0, column, obstacles_matrix)
     }
-
     fun createCoin() {
         val column = Random.nextInt(totalColumns)
         coinCol = column
-        if (obstacleCol != coinCol)
+        if (coinCol != obstacleCol)
             showImage(0, column, coins_matrix)
     }
     fun createLife() {
@@ -115,7 +123,6 @@ class GameMechanics() {
         if (lifeCol != coinCol && lifeCol!=obstacleCol)
             showImage(0, column, lives_matrix)
     }
-
     fun updateObstacles() {
         for (i in totalRows - 2 downTo 0) {
             for (j in 0 until totalColumns) {
@@ -163,6 +170,8 @@ class GameMechanics() {
             for (j in 0 until totalColumns) {
                 val cell = getCellImage(i, j, lives_matrix)
                 if (cell.visibility == View.VISIBLE) {
+                    Log.d("position", "livesCol: $i, livesRow: $j") // Debug log
+                    Log.d("position", "charRow: $characterRow,charCol: $characterCol") // Debug log
                     lifeRow = i
                     lifeCol = j
                     if (checkCollision(lifeRow, lifeCol)) {
@@ -178,7 +187,7 @@ class GameMechanics() {
             }
         }
     }
-    fun checkCollision(row: Int, col: Int): Boolean {
+    private fun checkCollision(row: Int, col: Int): Boolean {
         // Check if the given cell is directly above the character (one row before the character's row)
         return row == characterRow - 1 && col == characterCol
     }

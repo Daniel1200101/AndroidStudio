@@ -18,6 +18,7 @@ class GameManager(context: Context, private val lifeCount: Int = 3) : GameManage
         private set
     val isGameOver: Boolean
         get() = hits == lifeCount
+
     private var obstacleFrequency: Int = 4
     private var coinFrequency: Int = 25
     private var lifeFrequency: Int = 50
@@ -40,9 +41,8 @@ class GameManager(context: Context, private val lifeCount: Int = 3) : GameManage
 
     override fun coinCollisionDetected() {
         playCoinSound()
-        score += Constants.scoreLogic.coin_score
+        score += Constants.ScoreLogic.COIN_SCORE
     }
-
     override fun lifeCollisionDetected() {
         playLifeSound()
         if (hits > 0) {
@@ -51,7 +51,7 @@ class GameManager(context: Context, private val lifeCount: Int = 3) : GameManage
     }
 
     override fun increaseScore() {
-        score += Constants.scoreLogic.distance_per_obstacle
+        score += Constants.ScoreLogic.OBSTACLE_SCORE
         isScoreReachedMileStone()
     }
 
@@ -77,17 +77,17 @@ class GameManager(context: Context, private val lifeCount: Int = 3) : GameManage
     private fun isScoreReachedMileStone() {
         // Change frequency only when reaching a new milestone
         when {
-            score >= 5 * Constants.Score.SCORE_MILESTONE && lastMilestoneReached < 2 -> {
+            score >= 5 * Constants.ScoreLogic.SCORE_MILESTONE && lastMilestoneReached < 2 -> {
                 obstacleFrequency = 2
                 SignalManager.getInstance()
-                    .toast("${5 * Constants.Score.SCORE_MILESTONE} milestone reached, level up!")
+                    .toast("${5 * Constants.ScoreLogic.SCORE_MILESTONE} milestone reached, level up!")
                 lastMilestoneReached = 2 // Update to second milestone
             }
 
-            score >= Constants.Score.SCORE_MILESTONE && lastMilestoneReached < 1 -> {
+            score >= Constants.ScoreLogic.SCORE_MILESTONE && lastMilestoneReached < 1 -> {
                 obstacleFrequency = 3
                 SignalManager.getInstance()
-                    .toast("${Constants.Score.SCORE_MILESTONE} milestone reached, level up!")
+                    .toast("${Constants.ScoreLogic.SCORE_MILESTONE} milestone reached, level up!")
                 lastMilestoneReached = 1 // Update to first milestone
             }
 

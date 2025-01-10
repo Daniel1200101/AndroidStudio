@@ -6,32 +6,31 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.targil1.R
 import com.example.targil1.Utilities.BackgroundMusicPlayer
+import com.example.targil1.Utilities.LocationManagerHelper
 import com.google.android.material.button.MaterialButton
 
-class MenuActivity: AppCompatActivity() {
+class MenuActivity : AppCompatActivity() {
 
     // Buttons
     private lateinit var MENU_BTN_START: MaterialButton
     private lateinit var MENU_BTN_SETTINGS: MaterialButton
     private lateinit var MENU_BTN_RECORDS: MaterialButton
-
-    //private var buttonsMovement: Boolean = false
+    private lateinit var locationManagerHelper: LocationManagerHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-        BackgroundMusicPlayer.init(this)
         BackgroundMusicPlayer.getInstance().setResourceId(R.raw.menu_sound)
         findViews()
         initViews()
     }
+
     override fun onResume() {
         super.onResume()
         BackgroundMusicPlayer.getInstance().playMusic()
     }
-    override fun onPause() {
-        super.onPause()
-        BackgroundMusicPlayer.getInstance().pauseMusic()
+    override fun onStop() {
+        super.onStop()
     }
 
     private fun findViews() {
@@ -40,6 +39,7 @@ class MenuActivity: AppCompatActivity() {
         MENU_BTN_SETTINGS = findViewById(R.id.btn_settings)
         MENU_BTN_RECORDS = findViewById(R.id.btn_record)
     }
+
     private fun initViews() {
 
         MENU_BTN_START.setOnClickListener { view: View -> buttonClicked("start") }
@@ -48,21 +48,25 @@ class MenuActivity: AppCompatActivity() {
 
         // refreshUI()
     }
+
     private fun buttonClicked(btn: String) {
         when (btn) {
             "start" -> {
                 changeActivity(MainActivity::class.java) // Navigate to MainActivity
             }
+
             "settings" -> {
                 changeActivity(SettingsActivity::class.java) // Navigate to SettingsActivity
             }
-          /*  "records" -> {
-                changeActivity(RecordsActivity::class.java) // Navigate to RecordsActivity
+
+            "records" -> {
+                changeActivity(TopScoresActivity::class.java) // Navigate to RecordsActivity
             }
-        */
+
         }
 
     }
+
     private fun changeActivity(activity: Class<*>) {
         val intent = Intent(this, activity)
         startActivity(intent)

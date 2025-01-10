@@ -4,9 +4,9 @@ import com.example.targil1.enums.Directions
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.View
-import android.widget.GridView
 import android.widget.LinearLayout
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatImageButton
@@ -19,12 +19,15 @@ import com.example.targil1.R
 import com.example.targil1.Utilities.BackgroundMusicPlayer
 import com.example.targil1.Utilities.SignalManager
 import com.example.targil1.Utilities.Constants
+import com.example.targil1.Utilities.LocationManagerHelper
+import com.example.targil1.Utilities.ScoreData
 import com.example.targil1.enums.Difficulty
 import com.example.targil1.Utilities.TiltDetector
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.delay
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -57,11 +60,14 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var tiltDetector: TiltDetector
 
+
     private var gameJob: Job? = null
     private val totalRows = 8
     private val totalColumns = 5
 
     private lateinit var sharedPreferences: SharedPreferences
+
+    /// Game default settings
     private var buttonsMovement: Boolean = true // Default value
     private var gameDifficulty: Difficulty = Difficulty.EASY
     private var choosenGameDelay: Long = Constants.Timer.SLOW_DELAY
@@ -74,11 +80,12 @@ class MainActivity : AppCompatActivity() {
         buttonsMovement = sharedPreferences.getBoolean("buttonsMovement", false)
         gameDifficulty =
             Difficulty.valueOf(sharedPreferences.getString("selectedDifficulty", "EASY") ?: "EASY")
-        BackgroundMusicPlayer.init(this)
+
+        BackgroundMusicPlayer.getInstance().stopMusic() // Stop the previous background music
         BackgroundMusicPlayer.getInstance().setResourceId(R.raw.tom_and_jerry_chase)
+        BackgroundMusicPlayer.getInstance().playMusic()
         initTiltDetector()
         findViews() // Connecting the views of the main activity to their images.
-        SignalManager.init(this)
         initViews()
         startGame() // This starts the game and obstacle generation
     }
@@ -97,6 +104,8 @@ class MainActivity : AppCompatActivity() {
     override fun onStop() {
         super.onStop()
         tiltDetector.stop()
+        SignalManager.getInstance().cancelToast()
+        BackgroundMusicPlayer.getInstance().stopMusic()
         stopGame()
     }
 
@@ -183,38 +192,6 @@ class MainActivity : AppCompatActivity() {
             }
         )
     }
-
-    /*
-   private fun startGame() {
-        lifecycleScope.launch {
-            while (!gameManager.isGameOver) {
-                refreshUI()
-               delay(Constants.Timer.DELAY)
-            }
-        }
-    }
-    */
-    /*
-  private fun refreshUI() { // Checking the status of game .
-   gameMechanics.updateObstacles()
-    if (gameManager.isGameOver) { // Lost!
-        Log.d("Game Status", "Game Over! " + gameManager.score)
-        changeActivity("Game Over!", gameManager.score)
-    } else { // Ongoing game:
-        if (gameManager.obstacleFrequencies()) {
-            gameMechanics.createObstacle()
-        }
-        gameManager.tick()
-        main_LBL_score.text = gameManager.score.toString()
-        if (gameManager.hits != 0 ) {
-            main_IMG_hearts[main_IMG_hearts.size - gameManager.hits].visibility =
-                View.INVISIBLE
-
-        }
-
-    }
-  }
-     */
     private fun calculateDelay(gameDifficulty: Difficulty) {
         when (gameDifficulty) {
             Difficulty.EASY -> {
@@ -231,7 +208,6 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
     private fun startGame() {
         if (gameJob == null) { // Ensure no duplicate game jobs are created
             gameJob = lifecycleScope.launch {
@@ -248,12 +224,7 @@ class MainActivity : AppCompatActivity() {
         gameMechanics.updateLives()
         var heartPositionRemoved:Int = 0
         if (gameManager.isGameOver) { // Lost!
-            Log.d("Game Status", "Game Over! " + gameManager.score)
-            SignalManager.getInstance().toast("New game!")
-            for (view in main_IMG_hearts) {
-                view.visibility = View.VISIBLE
-            }
-            gameManager.setHits(0)
+            changeActivity(gameManager.score)
         }
         if (gameManager.shouldCreateObstacle()) {
             gameMechanics.createObstacle()
@@ -279,12 +250,10 @@ class MainActivity : AppCompatActivity() {
 
         }
     }
-
-    private fun changeActivity(message: String, score: Int) {
+    private fun changeActivity(score: Int) {
         val intent = Intent(this, ScoreActivity::class.java)
         var bundle = Bundle()
         bundle.putInt(Constants.BundleKeys.SCORE_KEY, score)
-        bundle.putString(Constants.BundleKeys.STATUS_KEY, message)
         intent.putExtras(bundle)
         startActivity(intent)
         finish()

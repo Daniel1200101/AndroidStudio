@@ -841,8 +841,8 @@
         android:layout_height="match_parent"
         android:layout_above="@+id/buttons"
         android:layout_below="@+id/topLayout"
-        android:orientation="vertical">
-
+        android:orientation="vertical"
+        >
 
         <!-- First row -->
         <LinearLayout
@@ -857,6 +857,7 @@
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:src="@drawable/red_cartoon_cheese"
+
                 />
 
             <androidx.appcompat.widget.AppCompatImageView

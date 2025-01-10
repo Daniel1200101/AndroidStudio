@@ -8,6 +8,8 @@ import android.widget.Switch
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.targil1.R
+import com.example.targil1.Utilities.BackgroundMusicPlayer
+import com.example.targil1.Utilities.SignalManager
 import com.example.targil1.enums.Difficulty
 import com.google.android.material.button.MaterialButton
 
@@ -38,9 +40,15 @@ class SettingsActivity : AppCompatActivity() {
         // Initialize views with current settings
         initViews()
     }
-
+    override fun onResume() {
+        super.onResume()
+    }
+    override fun onPause() {
+        super.onPause()
+        SignalManager.getInstance().cancelToast()
+    }
     private fun loadPreferences() {
-        val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("APP_SETTINGS", MODE_PRIVATE)
 
         // Load control mode preference
         buttonsMovement = sharedPreferences.getBoolean("buttonsMovement", true)
@@ -121,13 +129,13 @@ class SettingsActivity : AppCompatActivity() {
             Difficulty.MEDIUM -> "Medium selected. The obstacles will move at regular speed."
             Difficulty.HARD -> "Hard selected. The obstacles will move fast."
         }
-        Toast.makeText(this, feedbackMessage, Toast.LENGTH_SHORT).show()
+        SignalManager.getInstance().toast(feedbackMessage)
     }
 
     private fun onControlModeChanged(isChecked: Boolean) {
         buttonsMovement = isChecked
         val mode = if (isChecked) "buttons" else "phone movement"
-        Toast.makeText(this, "Using $mode to control character.", Toast.LENGTH_SHORT).show()
+        SignalManager.getInstance().toast("Using $mode to control character.")
     }
 
     private fun navigateToMenu() {
@@ -138,7 +146,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun savePreferences() {
-        val sharedPreferences = getSharedPreferences("app_prefs", MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("APP_SETTINGS", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putBoolean("buttonsMovement", buttonsMovement)
         editor.putString("selectedDifficulty", selectedDifficulty.name) // Save enum name directly
