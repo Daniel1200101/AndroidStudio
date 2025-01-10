@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">Tom And Jerry</string>
-    <string name="maps_api_key"> AIzaSyBC27C3NRgsjWdtwu17jr281o7HdseERGU </string>
+    <string name="maps_api_key"> Api_key </string>
 
 </resources>
