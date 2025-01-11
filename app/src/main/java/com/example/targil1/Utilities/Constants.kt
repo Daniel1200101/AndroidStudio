@@ -30,5 +30,8 @@ class Constants {
         const val CHARACTER_ROW = 7
         const val CHARACTER_COL = 2
     }
+    object Location{
+        const val LOCATION_PERMISSION_REQUEST_CODE = 1001
+    }
 
 }

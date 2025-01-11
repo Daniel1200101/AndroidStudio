@@ -13,12 +13,13 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:background="@color/red"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:elevation="4dp">
+        android:elevation="6dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp">
 
-        <!-- Back button, aligned to the left -->
+        <!-- Left arrow button in the toolbar -->
         <ImageButton
             android:id="@+id/btnBack"
             android:layout_width="40dp"
@@ -26,20 +27,20 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:contentDescription="Back"
             android:src="@android:drawable/ic_menu_revert"
-            android:layout_alignParentStart="true"
-            android:layout_centerVertical="true" />
+            android:layout_gravity="start|center_vertical" />
 
-        <!-- Title, centered in the Toolbar -->
+        <!-- Title in the center of the toolbar -->
         <TextView
             android:id="@+id/settingsTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Top scores"
-            android:layout_gravity="center"
-            android:textSize="32sp"
+            android:textSize="24sp"
             android:textStyle="bold"
+            android:layout_gravity="center"
             android:textColor="@android:color/white"
-            android:layout_centerInParent="true" />
+            android:layout_marginStart="8dp"/>
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"

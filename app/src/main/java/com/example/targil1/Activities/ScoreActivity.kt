@@ -4,57 +4,66 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.example.targil1.R
 import com.example.targil1.Utilities.Constants
 import com.example.targil1.Utilities.LocationManagerHelper
 import com.example.targil1.Utilities.ScoreData
 import com.example.targil1.Utilities.SignalManager
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textview.MaterialTextView
-import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.reflect.TypeToken
-import com.google.gson.Gson
 
 class ScoreActivity : AppCompatActivity() {
 
-    private lateinit var score_LBL_score: MaterialTextView
+    private lateinit var gameOverText: MaterialTextView
+    private lateinit var scoreText: MaterialTextView // TextView to display the score
+    private lateinit var positionText: MaterialTextView // TextView to display the position
     private lateinit var nameEditText: EditText
     private lateinit var submitButton: Button
     private var playerScore: Int = 0 // Declare the score variable globally
     private var playerName: String = ""
     private lateinit var locationManager: LocationManagerHelper
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_score)
+
         // Initialize the views
         findViews()
         initViews()
 
-        // Check if the score is in the top scores
-        if (isScoreInTopScores(playerScore)) {
-            score_LBL_score.text = "You are in the top scores! $playerScore"
-        } else {
-            score_LBL_score.text = "Nice try! Your score: $playerScore"
-        }
+        // Check if the score is in the top scores and show the score message
+        val scorePosition = getScorePosition(playerScore)
+        val gameOverMessage = "Game Over!"
+        gameOverText.text = gameOverMessage
+
+        // Update the score and position text
+        scoreText.text = "Your score: $playerScore"
+        positionText.text = "Your position: $scorePosition"
+
+        animateTextAppearance(gameOverText) // Add animation
+
         // Handle the submit button click
         submitButton.setOnClickListener {
             playerName = nameEditText.text.toString()
             if (playerName.isNotBlank()) {
                 savePlayerScore()
+                showSuccessSnackbar("Score saved! Changing activity...")
                 changeActivity()
             } else {
-                SignalManager.getInstance().toast("Please enter your name")
+                showWarningSnackbar("Please enter your name")
             }
         }
     }
 
     private fun findViews() {
-        score_LBL_score = findViewById(R.id.score_LBL_score)
+        gameOverText = findViewById(R.id.gameOverMessage)
+        scoreText = findViewById(R.id.yourScore) // Assuming your XML has this ID
+        positionText = findViewById(R.id.yourPosition) // Assuming your XML has this ID
         nameEditText = findViewById(R.id.nameEditText)
         submitButton = findViewById(R.id.submitButton)
     }
@@ -65,26 +74,42 @@ class ScoreActivity : AppCompatActivity() {
         playerScore = intent.getIntExtra(Constants.BundleKeys.SCORE_KEY, 0)
     }
 
+    private fun animateTextAppearance(textView: TextView) {
+        textView.alpha = 0f
+        textView.animate()
+            .alpha(1f)
+            .setDuration(1000) // 1-second fade-in animation
+            .start()
+    }
+
+    private fun showWarningSnackbar(message: String) {
+        Snackbar.make(findViewById(R.id.main), message, Snackbar.LENGTH_SHORT)
+            .setBackgroundTint(ContextCompat.getColor(this, R.color.warningColor))
+            .setTextColor(ContextCompat.getColor(this, android.R.color.white))
+            .show()
+    }
+
+    private fun showSuccessSnackbar(message: String) {
+        Snackbar.make(findViewById(R.id.main), message, Snackbar.LENGTH_SHORT)
+            .setBackgroundTint(ContextCompat.getColor(this, R.color.successColor))
+            .setTextColor(ContextCompat.getColor(this, android.R.color.white))
+            .show()
+    }
+
     private fun initManagers() {
         SharedPreferencesManager.init(this)
         LocationManagerHelper.init(this)
         locationManager = LocationManagerHelper.getInstance()
     }
 
-    private fun isScoreInTopScores(score: Int): Boolean {
+    private fun getScorePosition(score: Int): Int {
         val topScores: List<ScoreData> = SharedPreferencesManager.getInstance().getTopScores()
 
         // Ensure the list is sorted in descending order of scores
         val sortedScores = topScores.sortedByDescending { it.score }
 
-        // Check if the new score qualifies
-        return if (sortedScores.size < 10) {
-            // If less than 10 scores, the new score qualifies automatically
-            true
-        } else {
-            // Compare the new score with the lowest score in the top 10
-            score > sortedScores.last().score
-        }
+        // Get the position of the player's score
+        return sortedScores.indexOfFirst { it.score <= score } + 1
     }
 
     private fun savePlayerScore() {
@@ -128,3 +153,4 @@ class ScoreActivity : AppCompatActivity() {
         finish() // Close the ScoreActivity
     }
 }
+

@@ -1,11 +1,13 @@
 package com.example.targil1.Activities
 
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.targil1.R
 import com.example.targil1.Utilities.BackgroundMusicPlayer
+import com.example.targil1.Utilities.Constants
 import com.example.targil1.Utilities.LocationManagerHelper
 import com.google.android.material.button.MaterialButton
 
@@ -16,12 +18,17 @@ class MenuActivity : AppCompatActivity() {
     private lateinit var settingsButton: MaterialButton
     private lateinit var topScoresButton: MaterialButton
 
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
+        LocationManagerHelper.init(this)
+        checkLocationAndPermissions()
         findViews()
         initViews()
         initBackgroundMusic()
+
     }
 
     override fun onResume() {
@@ -73,6 +80,28 @@ class MenuActivity : AppCompatActivity() {
 
         }
 
+    }
+    private fun checkLocationAndPermissions() {
+        if (!LocationManagerHelper.getInstance().isLocationPermissionGranted()) {
+            // Request permission if not granted
+            LocationManagerHelper.getInstance().requestLocationPermission(this,Constants.Location.LOCATION_PERMISSION_REQUEST_CODE)
+        } else {
+            // Check if location is enabled
+            LocationManagerHelper.getInstance().requestEnableLocation(this)
+        }
+    }
+
+    // Handle permission result
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == Constants.Location.LOCATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                // Permission granted, check location status
+                LocationManagerHelper.getInstance().requestEnableLocation(this)
+            } else {
+                // Permission denied
+            }
+        }
     }
     private fun changeActivity(activity: Class<*>) {
         val intent = Intent(this, activity)

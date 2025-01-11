@@ -204,9 +204,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun refreshUI() { // Checking the status of game .
-        gridManager.updateObstacles()
-        gridManager.updateCoins()
-        gridManager.updateLives()
+        gridManager.updateGridObjects()
         var heartPositionRemoved: Int = 0
         if (gameManager.isGameOver) { // Lost!
             changeActivity(gameManager.score)

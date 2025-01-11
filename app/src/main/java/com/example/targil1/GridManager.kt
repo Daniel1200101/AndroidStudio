@@ -44,6 +44,7 @@ class GridManager : CharacterMovementListener {
         initializeGrid(this.coinsGrid)
         initializeGrid(this.livesGrid)
     }
+
     fun setGridManagerListener(listener: GridManagerListener) {
         gridManagerListener = listener
     }
@@ -55,6 +56,11 @@ class GridManager : CharacterMovementListener {
         showImage(0, column, obstaclesGrid)
     }
 
+    fun updateGridObjects() {
+        updateObstacles()
+        updateCoins()
+        updateLives()
+    }
     fun createCoin() {
         val column = Random.nextInt(totalColumns)
         coinCol = column
@@ -157,14 +163,15 @@ class GridManager : CharacterMovementListener {
     }
 
     override fun onCharacterMoved(row: Int, col: Int) {
-        characterRow=row
-        characterCol=col
-   Log.d("characterPosition","characterRow=$characterRow ,characterCol=$characterCol")
+        characterRow = row
+        characterCol = col
+        Log.d("characterPosition", "characterRow=$characterRow ,characterCol=$characterCol")
     }
+
     private fun initializeGrid(grid: LinearLayout) {
         for (i in 0 until Constants.Grid.TOTAL_ROWS) {
             for (j in 0 until Constants.Grid.TOTAL_COLUMNS) {
-               hideImage(i, j, grid)
+                hideImage(i, j, grid)
             }
         }
     }
