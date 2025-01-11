@@ -6,14 +6,12 @@ App Description:
 The app consists of five activities:
 
 Menu Activity:
-
 Includes three buttons:
 Start: Begins the game.
 Settings: Navigates to the settings activity, where users can adjust the game settings.
 Top Scores: Navigates to the top scores activity, displaying the highest scores and their corresponding locations on a map.
 
 Settings Activity:
-
 Offers game configuration options:
 Movement Controls:
 Right Switch: Jerry moves when pressing buttons on the screen.
