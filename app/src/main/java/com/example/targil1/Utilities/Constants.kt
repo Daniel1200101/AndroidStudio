@@ -22,5 +22,13 @@ class Constants {
     object TopScores{
         const val MAX_LIST = 5
     }
+    object Grid{
+        const val TOTAL_ROWS = 8
+        const val TOTAL_COLUMNS = 5
+    }
+    object CharacterStartPosition{
+        const val CHARACTER_ROW = 7
+        const val CHARACTER_COL = 2
+    }
 
 }

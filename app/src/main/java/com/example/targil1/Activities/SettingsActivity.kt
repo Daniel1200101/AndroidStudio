@@ -48,7 +48,7 @@ class SettingsActivity : AppCompatActivity() {
         SignalManager.getInstance().cancelToast()
     }
     private fun loadPreferences() {
-        val sharedPreferences = getSharedPreferences("APP_SETTINGS", MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("GAME_SETTINGS", MODE_PRIVATE)
 
         // Load control mode preference
         buttonsMovement = sharedPreferences.getBoolean("buttonsMovement", true)
@@ -146,7 +146,7 @@ class SettingsActivity : AppCompatActivity() {
     }
 
     private fun savePreferences() {
-        val sharedPreferences = getSharedPreferences("APP_SETTINGS", MODE_PRIVATE)
+        val sharedPreferences = getSharedPreferences("GAME_SETTINGS", MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         editor.putBoolean("buttonsMovement", buttonsMovement)
         editor.putString("selectedDifficulty", selectedDifficulty.name) // Save enum name directly

@@ -12,39 +12,47 @@ import com.google.android.material.button.MaterialButton
 class MenuActivity : AppCompatActivity() {
 
     // Buttons
-    private lateinit var MENU_BTN_START: MaterialButton
-    private lateinit var MENU_BTN_SETTINGS: MaterialButton
-    private lateinit var MENU_BTN_RECORDS: MaterialButton
-    private lateinit var locationManagerHelper: LocationManagerHelper
+    private lateinit var startButton: MaterialButton
+    private lateinit var settingsButton: MaterialButton
+    private lateinit var topScoresButton: MaterialButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_menu)
-        BackgroundMusicPlayer.getInstance().setResourceId(R.raw.menu_sound)
         findViews()
         initViews()
+        initBackgroundMusic()
     }
 
     override fun onResume() {
         super.onResume()
         BackgroundMusicPlayer.getInstance().playMusic()
     }
-    override fun onStop() {
-        super.onStop()
+
+    override fun onPause() {
+        super.onPause()
+        BackgroundMusicPlayer.getInstance().stopMusic()
+
+    }
+
+    private fun initBackgroundMusic()
+    {
+        BackgroundMusicPlayer.getInstance().setResourceId(R.raw.menu_sound)
+        BackgroundMusicPlayer.getInstance().playMusic()
     }
 
     private fun findViews() {
         // Initially set the buttons.
-        MENU_BTN_START = findViewById(R.id.btn_start)
-        MENU_BTN_SETTINGS = findViewById(R.id.btn_settings)
-        MENU_BTN_RECORDS = findViewById(R.id.btn_record)
+        startButton = findViewById(R.id.btn_start)
+        settingsButton = findViewById(R.id.btn_settings)
+        topScoresButton = findViewById(R.id.btn_top_scores)
     }
 
     private fun initViews() {
 
-        MENU_BTN_START.setOnClickListener { view: View -> buttonClicked("start") }
-        MENU_BTN_SETTINGS.setOnClickListener { view: View -> buttonClicked("settings") }
-        MENU_BTN_RECORDS.setOnClickListener { view: View -> buttonClicked("records") }
+        startButton.setOnClickListener { view: View -> buttonClicked("start") }
+        settingsButton.setOnClickListener { view: View -> buttonClicked("settings") }
+        topScoresButton.setOnClickListener { view: View -> buttonClicked("topScores") }
 
         // refreshUI()
     }
@@ -59,14 +67,13 @@ class MenuActivity : AppCompatActivity() {
                 changeActivity(SettingsActivity::class.java) // Navigate to SettingsActivity
             }
 
-            "records" -> {
+            "topScores" -> {
                 changeActivity(TopScoresActivity::class.java) // Navigate to RecordsActivity
             }
 
         }
 
     }
-
     private fun changeActivity(activity: Class<*>) {
         val intent = Intent(this, activity)
         startActivity(intent)

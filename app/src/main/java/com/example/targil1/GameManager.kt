@@ -2,12 +2,12 @@ package com.example.targil1
 
 import android.content.Context
 import android.util.Log
-import com.example.targil1.Interfaces.GameManagerListener
+import com.example.targil1.Interfaces.GridManagerListener
 import com.example.targil1.Utilities.Constants
 import com.example.targil1.Utilities.SignalManager
 import com.example.targil1.Utilities.SingleSoundPlayer
 
-class GameManager(context: Context, private val lifeCount: Int = 3) : GameManagerListener {
+class GameManager(context: Context, private val lifeCount: Int = 3) : GridManagerListener {
     var count: Int = 0
         private set
     var score: Int = 0
@@ -49,7 +49,6 @@ class GameManager(context: Context, private val lifeCount: Int = 3) : GameManage
             lifeBonus=1
         }
     }
-
     override fun increaseScore() {
         score += Constants.ScoreLogic.OBSTACLE_SCORE
         isScoreReachedMileStone()

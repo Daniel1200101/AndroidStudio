@@ -9,19 +9,18 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
-
+        BackgroundMusicPlayer.init(this)
         // Initialize utilities
         SignalManager.init(applicationContext)
-        BackgroundMusicPlayer.init(this)
         SharedPreferencesManager.init(applicationContext)
-        removeAllPlayerScores()
+        //removeAllPlayerScores()
 
     }
 
-
+/*
     fun removeAllPlayerScores() {
         val sharedPreferencesManager = SharedPreferencesManager.getInstance()
         sharedPreferencesManager.clearScores() // Removes the player scores
     }
-
+*/
 }
